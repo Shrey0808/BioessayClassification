@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DrugLab AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="particles-js"></div>
+    <div class="molecule"></div>
+    <div class="molecule"></div>
+    <div class="molecule"></div>
+    <div class="molecule"></div>
+
+    <!-- Landing Page Section -->
+    <section class="landing">
+        <div class="landing-content">
+            <h1 class="landing-title">DrugLab AI</h1>
+            <p class="landing-tagline">Unlock the Future of Compound Analysis</p>
+            <button class="get-started-btn" onclick="scrollToForm()">Get Started</button>
+        </div>
+    </section>
+
+    <!-- Form Section -->
+    <section class="form-section" id="form-section">
+        <div class="container">
+            <h1>DrugLab AI</h1>
+            <div class="input-group">
+                <input type="text" class="smiles-input" placeholder="Enter SMILES Notation">
+            </div>
+            <select class="test-select">
+                <option value="test1">Test 1 - Kinase Inhibition</option>
+                <option value="test2">Test 2 - Receptor Binding</option>
+                <option value="test3">Test 3 - Enzyme Activity</option>
+            </select>
+            <button class="generate-btn" onclick="generatePrediction()">Analyze</button>
+            <div class="loader" id="loader"></div>
+            <div class="results" id="results">
+                <div class="compound-info" id="compound-info">
+                    <h2>Compound Analysis</h2>
+                    <p id="compound-data"></p>
+                </div>
+                <div class="prediction" id="prediction">
+                    <h2>AI Prediction</h2>
+                    <div class="prediction-result" id="prediction-result"></div>
+                </div>
+                <button class="download-btn" id="download-btn">Download</button>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script>
+        particlesJS('particles-js', {
+            "particles": {
+                "number": { "value": 100, "density": { "enable": true, "value_area": 800 } },
+                "color": { "value": "#0F4C75" },
+                "shape": { "type": ["circle", "triangle"], "stroke": { "width": 1, "color": "#0F4C75" } },
+                "opacity": { "value": 0.8, "random": true },
+                "size": { "value": 3, "random": true },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#3282B8",
+                    "opacity": 0.4,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 4,
+                    "direction": "none",
+                    "random": true,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": { "enable": true, "mode": "repulse" },
+                    "onclick": { "enable": true, "mode": "push" },
+                    "resize": true
+                }
+            },
+            "retina_detect": true
+        });
+
+        // Smooth scroll to form section
+        function scrollToForm() {
+            document.getElementById('form-section').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
