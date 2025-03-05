@@ -30,11 +30,14 @@
             <div class="input-group">
                 <input type="text" class="smiles-input" placeholder="Enter SMILES Notation">
             </div>
-            <select class="test-select">
-                <option value="test1">Test 1 - Kinase Inhibition</option>
-                <option value="test2">Test 2 - Receptor Binding</option>
-                <option value="test3">Test 3 - Enzyme Activity</option>
-            </select>
+            <div class="custom-select">
+                <div class="selected-option">Test 1 - Kinase Inhibition</div>
+                <ul class="options-list" id="options-list">
+                    <li data-value="test1">Test 1 - Kinase Inhibition</li>
+                    <li data-value="test2">Test 2 - Receptor Binding</li>
+                    <li data-value="test3">Test 3 - Enzyme Activity</li>
+                </ul>
+            </div>
             <button class="generate-btn" onclick="generatePrediction()">Analyze</button>
             <div class="loader" id="loader"></div>
             <div class="results" id="results">
@@ -94,6 +97,32 @@
         function scrollToForm() {
             document.getElementById('form-section').scrollIntoView({ behavior: 'smooth' });
         }
+
+        // Custom dropdown functionality
+        const customSelect = document.querySelector('.custom-select');
+        const selectedOption = customSelect.querySelector('.selected-option');
+        const optionsList = customSelect.querySelector('.options-list');
+        const options = optionsList.querySelectorAll('li');
+        let selectedValue = 'test1'; // Default value
+
+        selectedOption.addEventListener('click', () => {
+            optionsList.classList.toggle('show');
+        });
+
+        options.forEach(option => {
+            option.addEventListener('click', () => {
+                selectedOption.textContent = option.textContent;
+                window.selectedValue = option.dataset.value; // Ensure global scope
+                optionsList.classList.remove('show');
+            });
+        });
+
+        // Close dropdown if clicked outside
+        document.addEventListener('click', (e) => {
+            if (!customSelect.contains(e.target)) {
+                optionsList.classList.remove('show');
+            }
+        });
     </script>
 </body>
 </html>

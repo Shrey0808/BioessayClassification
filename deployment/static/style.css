@@ -13,7 +13,7 @@ body {
   position: relative;
 }
 
-/* Particle Container */
+
 #particles-js {
   position: fixed;
   top: 0;
@@ -25,7 +25,7 @@ body {
   transition: opacity 0.3s ease;
 }
 
-/* Molecular Animation */
+
 .molecule {
   position: absolute;
   width: 20px;
@@ -41,7 +41,7 @@ body {
 .molecule:nth-child(3) { left: 70%; top: 60%; animation-delay: 4s; }
 .molecule:nth-child(4) { left: 40%; top: 80%; animation-delay: 6s; }
 
-/* Animations */
+
 @keyframes floatMolecule {
   0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.5; }
   50% { transform: translate(30px, -30px) scale(1.2); opacity: 0.7; }
@@ -81,7 +81,12 @@ body {
   100% { transform: translate(0); }
 }
 
-/* Landing Page Section */
+@keyframes slideDown {
+  0% { opacity: 0; transform: translateY(-10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+
 .landing {
   height: 100vh;
   display: flex;
@@ -132,7 +137,7 @@ body {
   transform: scale(0.98);
 }
 
-/* Form Section */
+
 .form-section {
   min-height: 100vh;
   display: flex;
@@ -141,7 +146,7 @@ body {
   padding: 40px 0;
 }
 
-/* Dim everything except popup */
+
 body.popup-active #particles-js,
 body.popup-active .molecule,
 body.popup-active .container,
@@ -171,7 +176,7 @@ body.popup-active .landing {
   letter-spacing: 0.5px;
 }
 
-/* Input Field */
+
 .input-group {
   position: relative;
   margin-bottom: 30px;
@@ -200,8 +205,14 @@ body.popup-active .landing {
   animation: ripple 0.6s ease-out;
 }
 
-/* Dropdown */
-.test-select {
+
+.custom-select {
+  position: relative;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.selected-option {
   width: 100%;
   padding: 14px;
   background: rgba(230, 240, 250, 0.7);
@@ -209,17 +220,53 @@ body.popup-active .landing {
   border-radius: 8px;
   color: #0F4C75;
   font-size: 1.1rem;
-  appearance: none;
   cursor: pointer;
   transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-  margin-bottom: 20px;
 }
 
-.test-select:hover {
+.selected-option:hover {
   transform: scale(1.02);
 }
 
-/* Generate Button */
+.options-list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: rgba(230, 240, 250, 0.9);
+  border: 1px solid rgba(50, 130, 184, 0.4);
+  border-radius: 8px;
+  list-style: none;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease-in-out;
+  z-index: 10;
+}
+
+.options-list.show {
+  max-height: 200px; 
+}
+
+.options-list li {
+  padding: 10px 14px;
+  color: #0F4C75;
+  font-size: 1.1rem;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.options-list.show li {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.options-list li:hover {
+  background: rgba(50, 130, 184, 0.1);
+}
+
+
 .generate-btn {
   width: 130px;
   padding: 10px 16px;
@@ -249,7 +296,7 @@ body.popup-active .landing {
   animation: morphPulse 1s infinite;
 }
 
-/* Loading Spinner */
+
 .loader {
   display: none;
   width: 40px;
@@ -266,7 +313,7 @@ body.popup-active .landing {
   100% { transform: rotate(360deg); }
 }
 
-/* Results Panels */
+
 .results {
   display: none;
   margin-top: 35px;
@@ -319,7 +366,7 @@ body.popup-active .landing {
   color: #ef4444;
 }
 
-/* Download Button */
+
 .download-btn {
   display: none;
   width: 130px;
@@ -339,4 +386,9 @@ body.popup-active .landing {
 .download-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 16px rgba(15, 76, 117, 0.3);
+}
+
+
+.rounded-popup {
+  border-radius: 30px !important;
 }

@@ -1,21 +1,26 @@
+window.selectedValue = 'test1'; // Global variable for dropdown selection
+
 async function generatePrediction() {
     const smiles = document.querySelector('.smiles-input').value;
-    const test = document.querySelector('.test-select').value;
+    const test = window.selectedValue; // Use global selected value
     const loader = document.getElementById('loader');
     const results = document.getElementById('results');
     const generateBtn = document.querySelector('.generate-btn');
 
     if (!smiles) {
-        document.body.classList.add('popup-active'); // Dim background
+        document.body.classList.add('popup-active');
         await Swal.fire({
             icon: 'warning',
             title: 'Input Required',
             text: 'Please provide a valid SMILES notation to proceed.',
-            background: '#D4E8F8', // Match container color
+            background: '#D4E8F8',
             color: '#3282B8',
-            confirmButtonColor: '#3282B8'
+            confirmButtonColor: '#3282B8',
+            customClass: {
+                popup: 'rounded-popup'
+            }
         });
-        document.body.classList.remove('popup-active'); // Restore visibility
+        document.body.classList.remove('popup-active');
         return;
     }
 
@@ -32,22 +37,24 @@ async function generatePrediction() {
 
         const data = await response.json();
 
-        if (response.ok) {
-            generateBtn.classList.remove('loading');
-            loader.style.display = 'none';
+        generateBtn.classList.remove('loading');
+        loader.style.display = 'none';
 
-            document.body.classList.add('popup-active'); // Dim background
+        if (response.ok) {
+            document.body.classList.add('popup-active');
             const result = await Swal.fire({
                 icon: 'success',
                 title: 'Analysis Complete',
                 text: 'The compound has been analyzed successfully.',
-                background: '#D4E8F8', // Match container color
+                background: '#D4E8F8',
                 color: '#3282B8',
-                confirmButtonColor: '#3282B8'
+                confirmButtonColor: '#3282B8',
+                customClass: {
+                    popup: 'rounded-popup'
+                }
             });
 
             if (result.isConfirmed) {
-                // Only show results after "OK" is pressed
                 results.style.display = 'block';
 
                 const compoundData = document.getElementById('compound-data');
@@ -71,7 +78,7 @@ async function generatePrediction() {
 
                 document.getElementById('download-btn').style.display = 'block';
             }
-            document.body.classList.remove('popup-active'); // Restore visibility
+            document.body.classList.remove('popup-active');
         } else {
             throw new Error(data.error || 'An unexpected error occurred.');
         }
@@ -79,28 +86,34 @@ async function generatePrediction() {
         generateBtn.classList.remove('loading');
         loader.style.display = 'none';
 
-        document.body.classList.add('popup-active'); // Dim background
+        document.body.classList.add('popup-active');
         await Swal.fire({
             icon: 'error',
             title: 'Error',
             text: error.message,
-            background: '#D4E8F8', // Match container color
+            background: '#D4E8F8',
             color: '#3282B8',
-            confirmButtonColor: '#3282B8'
+            confirmButtonColor: '#3282B8',
+            customClass: {
+                popup: 'rounded-popup'
+            }
         });
-        document.body.classList.remove('popup-active'); // Restore visibility
+        document.body.classList.remove('popup-active');
     }
 }
 
 document.getElementById('download-btn').addEventListener('click', async () => {
-    document.body.classList.add('popup-active'); // Dim background
+    document.body.classList.add('popup-active');
     await Swal.fire({
         icon: 'info',
         title: 'Download Unavailable',
         text: 'This feature is under development.',
-        background: '#D4E8F8', // Match container color
+        background: '#D4E8F8',
         color: '#3282B8',
-        confirmButtonColor: '#3282B8'
+        confirmButtonColor: '#3282B8',
+        customClass: {
+            popup: 'rounded-popup'
+        }
     });
-    document.body.classList.remove('popup-active'); // Restore visibility
+    document.body.classList.remove('popup-active');
 });

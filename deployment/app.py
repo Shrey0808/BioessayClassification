@@ -1,27 +1,41 @@
-from flask import Flask, render_template, request, jsonify
-from prediction import predict_compound
+from flask import Flask, request, jsonify, render_template
+import os
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static', template_folder='templates')
 
+# Mock ML prediction function 
+def predict_compound(smiles, test):
+    is_active = len(smiles) > 10
+    
+    # Mock molecular properties 
+    return {
+        "XLogP": 3.45,
+        "PSA": 78.9,
+        "NumRot": 5,
+        "NumHBA": 3,
+        "NumHBD": 2,
+        "MW": 324.5,
+        "prediction": "ACTIVE" if is_active else "INACTIVE"
+    }
+
+# Route to serve the frontend
 @app.route('/')
-def index():
+def serve_frontend():
     return render_template('index.html')
 
+# API endpoint for prediction
 @app.route('/predict', methods=['POST'])
 def predict():
     data = request.get_json()
-    smiles = data.get('smiles')
-    test = data.get('test')
-    
-    if not smiles or not test:
-        return jsonify({"error": "SMILES and test type are required."}), 400
-    
+    smiles = data.get('smiles', '')
+    test = data.get('test', '')
+
+    if not smiles:
+        return jsonify({"error": "SMILES string is required"}), 400
+
+    # Get prediction and properties
     result = predict_compound(smiles, test)
-    
-    if "error" in result:
-        return jsonify(result), 400
-    
-    return jsonify(result), 200
+    return jsonify(result)
 
 if __name__ == '__main__':
     app.run(debug=True)
