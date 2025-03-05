@@ -31,19 +31,28 @@
                 <input type="text" class="smiles-input" placeholder="Enter SMILES Notation">
             </div>
             <div class="custom-select">
-                <div class="selected-option">Test 1 - Kinase Inhibition</div>
+                <div class="selected-option">Binding Affinity to Formylpeptide Receptor (AID362)</div>
                 <ul class="options-list" id="options-list">
-                    <li data-value="test1">Test 1 - Kinase Inhibition</li>
-                    <li data-value="test2">Test 2 - Receptor Binding</li>
-                    <li data-value="test3">Test 3 - Enzyme Activity</li>
+                    <li data-value="AID362">Binding Affinity to Formylpeptide Receptor (AID362)</li>
+                    <li data-value="AID373">EDG3 Sphingolipid Receptor Inhibition (AID373)</li>
+                    <li data-value="AID456">TNFa-induced VCAM-1 Expression Inhibition (AID456)</li>
+                    <li data-value="AID604">Rho Kinase 2 (ROCK2) Inhibition (AID604)</li>
+                    <li data-value="AID687">Coagulation Factor XI Inhibition (AID687)</li>
+                    <li data-value="AID688">Yeast eIF2B Activity Modulation (AID688)</li>
+                    <li data-value="AID746">Mitogen-Activated Protein Kinase (MAPK) Inhibition (AID746)</li>
                 </ul>
             </div>
             <button class="generate-btn" onclick="generatePrediction()">Analyze</button>
             <div class="loader" id="loader"></div>
             <div class="results" id="results">
+                <div class="molecule-image" id="molecule-image"></div>
                 <div class="compound-info" id="compound-info">
                     <h2>Compound Analysis</h2>
                     <p id="compound-data"></p>
+                </div>
+                <div class="druglikeness" id="druglikeness">
+                    <h2>Drug-Likeness</h2>
+                    <p id="druglikeness-data"></p>
                 </div>
                 <div class="prediction" id="prediction">
                     <h2>AI Prediction</h2>
@@ -103,7 +112,7 @@
         const selectedOption = customSelect.querySelector('.selected-option');
         const optionsList = customSelect.querySelector('.options-list');
         const options = optionsList.querySelectorAll('li');
-        let selectedValue = 'test1'; // Default value
+        let selectedValue = 'AID362'; // Default value
 
         selectedOption.addEventListener('click', () => {
             optionsList.classList.toggle('show');
@@ -112,7 +121,7 @@
         options.forEach(option => {
             option.addEventListener('click', () => {
                 selectedOption.textContent = option.textContent;
-                window.selectedValue = option.dataset.value; // Ensure global scope
+                window.selectedValue = option.dataset.value;
                 optionsList.classList.remove('show');
             });
         });

@@ -392,3 +392,56 @@ body.popup-active .landing {
 .rounded-popup {
   border-radius: 30px !important;
 }
+
+.results {
+  display: none;
+  margin-top: 35px;
+}
+
+.molecule-image {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.molecule-image img {
+  max-width: 200px;
+  border: 1px solid rgba(50, 130, 184, 0.3);
+  border-radius: 8px;
+}
+
+.compound-info, .druglikeness, .prediction {
+  background: #D4E8F8;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 16px rgba(15, 76, 117, 0.15);
+  border: 1px solid rgba(50, 130, 184, 0.3);
+  transition: all 0.3s ease;
+}
+
+.compound-info h2, .druglikeness h2, .prediction h2 {
+  color: #0F4C75;
+  margin-bottom: 15px;
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+.compound-info p, .druglikeness p {
+  font-size: 1rem;
+  color: #3282B8;
+  line-height: 1.6;
+}
+
+.compound-info p span, .druglikeness p span {
+  display: block;
+  opacity: 0;
+}
+
+.prediction-result {
+  font-size: 1.8rem;
+  font-weight: 600;
+  text-align: center;
+  padding: 12px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
