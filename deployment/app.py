@@ -63,5 +63,3 @@ def download():
         mimetype='text/csv'
     )
 
-if __name__ == '__main__':
-    app.run()
