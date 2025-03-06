@@ -237,14 +237,28 @@ body.popup-active .landing {
   border: 1px solid rgba(50, 130, 184, 0.4);
   border-radius: 8px;
   list-style: none;
-  max-height: 0;
-  overflow: hidden;
+  max-height: 0; /* Closed state */
+  overflow: hidden; /* Prevents content spill when closed */
   transition: max-height 0.5s ease-in-out;
   z-index: 10;
 }
 
 .options-list.show {
-  max-height: 200px; 
+  max-height: 400px; /* Open state: fits 7 items (~50px each) */
+  overflow-y: scroll; /* Scrollbar for overflow */
+}
+
+/* Responsive adjustment for phones */
+@media (max-width: 768px) {
+  .options-list.show {
+    max-height: 300px; /* Smaller but scrollable on phones */
+    font-size: 0.9rem; /* Slightly smaller text */
+  }
+}
+
+/* Smooth scrolling on mobile */
+.options-list {
+  -webkit-overflow-scrolling: touch;
 }
 
 .options-list li {
